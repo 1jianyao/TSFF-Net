@@ -1,0 +1,41 @@
+
+#train: ../VOCData/dataSet_path/train.txt
+#
+#val: ../VOCData/dataSet_path/val.txt
+#
+#test: ../VOCData/dataSet_path/test.txt
+
+train: ../yolov5-master/VOCData/dataSet_path/train.txt
+
+val: ../yolov5-master/VOCData/dataSet_path/val.txt
+
+test: ../yolov5-master/VOCData/dataSet_path/test.txt
+
+
+
+train2: ../yolov5-master/VOCData/dataSet_path2/train.txt
+
+val2: ../yolov5-master/VOCData/dataSet_path2/val.txt
+
+test2: ../yolov5-master/VOCData/dataSet_path2/test.txt
+
+#train: ../VOCData/dataSet_path/train.txt
+#
+#val: ../VOCData/dataSet_path/val.txt
+#
+#test: ../VOCData/dataSet_path/test.txt
+
+#train: D:\project1\sf6_dection\object_detection\yolov5-master\yolov5-master\VOCData\train.txt
+#
+#val: D:\project1\sf6_dection\object_detection\yolov5-master\yolov5-master\VOCData\val.txt
+#
+#test: D:\project1\sf6_dection\object_detection\yolov5-master\yolov5-master\VOCData\test.txt
+nc: 1
+
+# Classes
+names: ['SF6']
+
+
+
+# Download script/URL (optional) ---------------------------------------------------------------------------------------
+

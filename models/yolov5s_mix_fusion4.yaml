@@ -1,0 +1,62 @@
+# Parameters
+nc: 1  # number of classes
+depth_multiple: 0.33  # model depth multiple
+width_multiple: 0.50  # layer channel multiple
+fusion_depth: 2  # layer channel multiple
+anchors:
+  - [10,13, 16,30, 33,23]  # P3/8
+  - [30,61, 62,45, 59,119]  # P4/16
+  - [116,90, 156,198, 373,326]  # P5/32
+
+# 设计一个自适应融合模块（图像1提取特征部分）
+# 设计一个自适应融合模块（图像1提取特征部分）
+backbone1:
+  # [from, number, module, args]
+  [[-1, 1, EIR_cabm, [3, 8, 8]],  # 0-P1/2  [ch_out, kernel, stride, padding]=[64, 6, 2, 2] 故输出为[64*320*320]                                 #   [-1, 1, Conv, [128, 3, 2]],  # 1-P2/4  输出为128*160*160
+    #640*640*8
+   [ -1, 3, C3, [ 8 ] ], #
+#   [-1, 1, Conv, [64, 3, 2]],   # 3
+  ]
+
+#  图像2提取特征部分
+backbone2:
+  [[-1, 1, EIR_cabm, [3, 8, 8]],  # 1-P1/2  [ch_out, kernel, stride, padding]=[64, 6, 2, 2] 故输出为[64*320*320]
+    #640*640*8
+   [ -1, 3, C3, [ 8 ] ], #
+   [[-1,0], 1, iAFF, [4]],     # 2
+#   [[-1, 0, 1], 1, BiFPN_Concat3, [1]],
+   [-1, 1, Conv, [128, 3, 4]],   # 输出为128*160*160
+   [-1, 3, C3, [128]],           # 4        #5
+   [-1, 1, Conv, [256, 3, 2]],  # 5-P3/8  输出为256*80*80
+   [-1, 6, C3, [256]],           # 9         # 输出为256*80*80
+   [-1, 1, Conv, [512, 3, 2]],  # 10-P4/16   输出为512*40*40
+   [-1, 9, C3, [512]],           # 8          # 输出为512*40*40
+   [-1, 1, Conv, [1024, 3, 2]],  # 9-P5/32   输出为1024*20*20
+   [-1, 3, C3, [1024]],            # 10        # 输出为1024*20*20
+   [-1, 1, SPPF, [1024, 5]],  # 11        # 输出为1024*20*20
+  ]
+
+
+# YOLOv5 v6.0 BiFPN head
+head:
+  [[-1, 1, Conv, [512, 1, 1]],          # 12
+   [-1, 1, nn.Upsample, [None, 2, 'nearest']],  # 13
+   [[-1, 10], 1, BiFPN_Concat2, [1]],  # # 14cat backbone P4 <--- BiFPN change
+   [-1, 3, C3, [512, False]],  # 15
+
+   [-1, 1, Conv, [256, 1, 1]],    # 16
+   [-1, 1, nn.Upsample, [None, 2, 'nearest']],   # 17
+   [[-1, 8], 1, BiFPN_Concat2, [1]],  # # 18cat backbone P3 <--- BiFPN change
+   [-1, 3, C3, [256, False]],  # 21  # 3   (P3/8-small)
+
+   [-1, 1, Conv, [256, 3, 2]],       # 20
+   [[-1, 18, 10], 1, BiFPN_Concat3, [1]],  # 21# cat P4 <--- BiFPN change
+   [-1, 3, C3, [512, False]],  # 24 (P4/16-medium)
+
+   [-1, 1, Conv, [512, 3, 2]],   # 23
+   [[-1, 14], 1, BiFPN_Concat2, [1]], # 24 # cat head P5 <--- BiFPN change
+   [-1, 3, C3, [1024, False]],  # 27 (P5/32-large)
+
+   [[21, 24, 27], 1, Detect, [nc, anchors]],  # Detect(P3, P4, P5)
+  ]
+
