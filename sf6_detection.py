@@ -135,28 +135,28 @@ def detection_sf6(video):
         FP=False
         IOU_max_MP=0
         frames2, FP, IOU_max_MP=iou_img(bonbox,box_all,frames,IOU_max_MP,FP,thresh)
-        # for box2 in box_all:
-        #     IOU_max_FP=0
-        #     for box1 in bonbox:
-        #         box_xmin = round(box1[0])
-        #         box_ymin =  round(box1[1])
-        #         box_xmax = round(box1[2])
-        #         box_ymax =  round(box1[3])
-        #         cv2.rectangle(result, (box_xmin, box_ymax), (box_xmax, box_ymin), (0, 255,0), 2)
-        #
-        #         IOU = calculate_iou(box1, box2)
-        #         print("IOU",IOU)
-        #         print("-------------")
-        #         IOU_max_MP = max(IOU_max_MP, IOU)
-        #         IOU_max_FP +=IOU
-        #         # IOU_max_FP=max(IOU_max_FP, IOU)
-        #     if  IOU_max_FP<thresh:
-        #         FP = True
-        #         box_xmin = round(box2[0])
-        #         box_ymin = round(box2[1])
-        #         box_xmax = round(box2[2])
-        #         box_ymax = round(box2[3])
-        #         cv2.rectangle(result, (box_xmin, box_ymax), (box_xmax, box_ymin), (255,0, 0), 2)
+        for box2 in box_all:
+            IOU_max_FP=0
+            for box1 in bonbox:
+                box_xmin = round(box1[0])
+                box_ymin =  round(box1[1])
+                box_xmax = round(box1[2])
+                box_ymax =  round(box1[3])
+                cv2.rectangle(result, (box_xmin, box_ymax), (box_xmax, box_ymin), (0, 255,0), 2)
+        
+                IOU = calculate_iou(box1, box2)
+                print("IOU",IOU)
+                print("-------------")
+                IOU_max_MP = max(IOU_max_MP, IOU)
+                IOU_max_FP +=IOU
+                # IOU_max_FP=max(IOU_max_FP, IOU)
+            if  IOU_max_FP<thresh:
+                FP = True
+                box_xmin = round(box2[0])
+                box_ymin = round(box2[1])
+                box_xmax = round(box2[2])
+                box_ymax = round(box2[3])
+                cv2.rectangle(result, (box_xmin, box_ymax), (box_xmax, box_ymin), (255,0, 0), 2)
 
 
         # print(out_file4 + "/" + "{}-".format(video_n)+"{}.jpg".format(i))
