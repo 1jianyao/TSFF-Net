@@ -4,3 +4,4 @@ https://github.com/1jianyao/TSFF-Net/blob/main/TSFF-net2.png
 
 ![image](https://github.com/1jianyao/TSFF-Net/blob/main/TSFF-net2.png)
 ![image](https://github.com/1jianyao/TSFF-Net/blob/main/train.png)
+https://github.com/1jianyao/TSFF-Net/issues/2
