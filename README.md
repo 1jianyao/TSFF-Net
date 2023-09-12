@@ -5,5 +5,6 @@ https://github.com/1jianyao/TSFF-Net/blob/main/TSFF-net2.png
 ![image](https://github.com/1jianyao/TSFF-Net/blob/main/TSFF-net2.png)
 ![image](https://github.com/1jianyao/TSFF-Net/blob/main/train.png)
 
-https://github.com/1jianyao/TSFF-Net/assets/102841838/7658bceb-9005-490f-8da7-d78530db8146.mp4
+//图片地址可以通过由击图片复制地址得到
+![image](https://github.com/dandan18cute/sell/blob/master/seller.gif?raw=true)
 
