@@ -1,2 +1,3 @@
-[Intro.pdf](http://USERNAME.github.io/REPONAME/docs/Intro.pdf).
+[Intro.pdf]([https://github.com/1jianyao/TSFF-Net/blob/main/train.pdf)https://github.com/1jianyao/TSFF-Net/blob/main/train.pdf]).
+
 
