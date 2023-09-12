@@ -16,7 +16,7 @@ https://github.com/1jianyao/TSFF-Net/blob/main/TSFF-net2.png
 // TSFF-Net test results in scenario 4  
 ![image](https://github.com/1jianyao/TSFF-Net/blob/main/ezgif.com-optimize%20(2).gif?raw=true)
 
-// Yolo8n test results in scenario 1
+// Yolo8n test results in scenario 4
 ![image](https://github.com/1jianyao/TSFF-Net/blob/main/ezgif.com-optimize%20(4).gif?raw=true)
 
 
